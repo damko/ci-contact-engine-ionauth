@@ -1,7 +1,7 @@
 <?php
  
-if (!function_exists ( 'startsWith' )){
-	function startsWith($haystack, $needle)
+if (!function_exists ( 'starts_with' )){
+	function starts_with($haystack, $needle)
 	{
 		if(!is_string($haystack) || empty($haystack)) return false;
 		if(!is_string($needle) || empty($needle)) return false;
@@ -10,8 +10,8 @@ if (!function_exists ( 'startsWith' )){
 	}
 }
 
-if (!function_exists ( 'endsWith' )){
-	function endsWith($haystack, $needle)
+if (!function_exists ( 'ends_with' )){
+	function ends_with($haystack, $needle)
 	{
 		if(!is_string($haystack) || empty($haystack)) return false;
 		if(!is_string($needle) || empty($needle)) return false;

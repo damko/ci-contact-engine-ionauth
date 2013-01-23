@@ -1536,7 +1536,7 @@ class Ion_auth_contact_engine_model extends CI_Model
 		
 		//it checks that $hash_password begins with the encryption tag {SHA} or {MD5}
 		$this->load->helper('ionauth'); //this is mandatory in case the application is not used as a spark
-		if( !startsWith($hash_password, '{SHA}') && !startsWith($hash_password, '{MD5}')) return false;
+		if( !starts_with($hash_password, '{SHA}') && !starts_with($hash_password, '{MD5}')) return false;
 		
 		//update Contact Engine
 		$data = $this->_filter_data_ldap($data);
