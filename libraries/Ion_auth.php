@@ -268,8 +268,11 @@ class Ion_auth
 			}
 			else
 			{
-				$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_forgot_password_complete', 'ion_auth'), $data, true);
-
+				//$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_forgot_password_complete', 'ion_auth'), $data, true);
+				//FIXME I don't get what messed up everything. Anyway this is a bad workaround that must be fixed
+				$message = $this->load->view($this->config->item('email_forgot_password_complete', 'ion_auth'), $data, true, 'smarty','/sparks/ion_auth/2.3.3/views/auth/email/');
+				//$message = $this->load->view($this->config->item('email_forgot_password', 'ion_auth'), $data, true, $template_engine, $path);
+				
 				$this->email->clear();
 				$this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
 				$this->email->to($profile->email);

@@ -644,8 +644,9 @@ class Ion_auth_contact_engine_model extends CI_Model
 
 		$this->trigger_events('extra_where');
 
-		return $this->db->where('email', $email)
-		                ->count_all_results($this->tables['users']) > 0;
+		//$email = 'dam@venturin.net';
+		$count = $this->db->where('email', $email)->count_all_results($this->tables['users']) > 0;
+		return $count;
 	}
 
 	/**
@@ -751,10 +752,10 @@ class Ion_auth_contact_engine_model extends CI_Model
 			
 			//updates the password in Contact Engine
 			$data = array();
-			if(!$this->ion_auth_model->update_contact_engine($profile,$this->ion_auth_model->hash_password($new_password), $data)) return false;
+			if(!$this->ion_auth_model->update_contact_engine($profile,$this->ion_auth_model->hash_password($password), $data)) return false;
 		
 			//automatically logs-in the user
-			if(!$this->ion_auth_model->login($profile->{$identity},$new_password,true)) return false;
+			if(!$this->ion_auth_model->login($profile->email,$password,true)) return false;
 		
 			
 			return $password;
@@ -784,9 +785,6 @@ class Ion_auth_contact_engine_model extends CI_Model
 		//checks if the email has been already registered in Contact Engine
 		$rest_return = $this->rest->get($method, $input, 'serialize');
 		
-		//TODO DAM delme
-		//if(!$rest_return) return FALSE;
-		
 		//parsing REST return
 		$this->crr->importCeReturnObject($rest_return);
 			
@@ -814,9 +812,6 @@ class Ion_auth_contact_engine_model extends CI_Model
 			
 			//adds the new contact in Contact Engine
 			$rest_return_creation = $this->rest->post($method, $input, 'serialize');
-			
-			//TODO DAM delme
-			//if(!$rest_return_creation) return FALSE;
 			
 			//parsing REST return
 			$this->crr->importCeReturnObject($rest_return_creation);
@@ -935,9 +930,6 @@ class Ion_auth_contact_engine_model extends CI_Model
 
 		//performing authentication request to contact engine
 		$rest_return = $this->rest->get($method, $input, 'serialize');		
-		
-		//TODO DAM delme
-		//if(!$rest_return) return false;
 		
 		//parsing REST return
 		$this->crr->importCeReturnObject($rest_return);
